@@ -1,0 +1,8 @@
+# Feel free to add your Python dependencies below. For formatting guidelines, see:
+# https://pip.pypa.io/en/latest/reference/requirements-file-format/
+
+apify ~= 1.7.0
+playwright ~= 1.39.0
+supabase
+beautifulsoup4
+requests
