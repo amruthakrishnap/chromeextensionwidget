@@ -17,7 +17,7 @@ SUPABASE_KEY = "Your Supabase Key"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Apify client initialization
-client = ApifyClient("apify_api_zbyqu2dzD94VC6iwhDzZ4uuPmKtM3t25AjRP")
+client = ApifyClient("your Apify Api Key")
 
 # Route for the root (/) to serve the HTML form
 from flask import Flask, request, jsonify, render_template_string
