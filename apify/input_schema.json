@@ -1,0 +1,15 @@
+{
+    "title": "Chrome Web Store Extension Scraper",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "curl": {
+            "title": "Extension URL",
+            "type": "string",
+            "description": "URL of the Chrome Web Store extension to scrape.",
+            "default": "https://chromewebstore.google.com/detail/chatgpt-organize-with-fol/jijhgfapogfphcccjlpoiphpjgedblpo/reviews",
+            "editor": "textfield"
+        }
+    },
+    "required": ["curl"]
+}
