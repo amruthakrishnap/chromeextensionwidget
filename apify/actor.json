@@ -1,0 +1,92 @@
+{
+    "actorSpecification": 1,
+    "name": "my-actor",
+    "title": "Chrome Web Store Extension Scraper",
+    "description": "Scrapes reviews and other information from a Chrome Web Store extension page and stores it in a Supabase database.",
+    "version": "0.0",
+    "meta": {
+        "templateId": "python-playwright"
+    },
+    "input": "./input_schema.json",
+    "dockerfile": "./Dockerfile",
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "title": "Scraped Extension Data",
+            "views": {
+                "extension_data": {
+                    "title": "Scraped Extension Data",
+                    "transformation": {
+                        "fields": [
+                            "extension_name",
+                            "extension_url",
+                            "developer",
+                            "overall_rating",
+                            "total_rating",
+                            "extension_type",
+                            "total_users",
+                            "name",
+                            "date",
+                            "rating",
+                            "review",
+                            "helpful"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "extension_name": {
+                                "label": "Extension Name",
+                                "format": "text"
+                            },
+                            "extension_url": {
+                                "label": "Extension URL",
+                                "format": "text"
+                            },
+                            "developer": {
+                                "label": "Developer",
+                                "format": "text"
+                            },
+                            "overall_rating": {
+                                "label": "Overall Rating",
+                                "format": "text"
+                            },
+                            "total_rating": {
+                                "label": "Total Rating",
+                                "format": "text"
+                            },
+                            "extension_type": {
+                                "label": "Extension Type",
+                                "format": "text"
+                            },
+                            "total_users": {
+                                "label": "Total Users",
+                                "format": "text"
+                            },
+                            "name": {
+                                "label": "Reviewer Name",
+                                "format": "text"
+                            },
+                            "date": {
+                                "label": "Review Date",
+                                "format": "text"
+                            },
+                            "rating": {
+                                "label": "Rating",
+                                "format": "text"
+                            },
+                            "review": {
+                                "label": "Review Text",
+                                "format": "text"
+                            },
+                            "helpful": {
+                                "label": "Helpful Count",
+                                "format": "text"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
