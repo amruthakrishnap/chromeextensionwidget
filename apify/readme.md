@@ -1,6 +1,7 @@
 # Apify Setup Guide
 
 This guide walks you through the setup of an Apify Actor to scrape Chrome extension reviews using Python and Playwright.
+Guide Vide0 : https://drive.google.com/file/d/1Zf2S2-FikoA65xFGwxaiy53Xfy5tgm-2/view?usp=sharing
 
 ## Step-by-Step Setup
 
