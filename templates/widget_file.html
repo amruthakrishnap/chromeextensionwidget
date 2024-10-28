@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget Customization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 0 2em 2em 2em; /* Only side and bottom padding */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .header {
+            background-color: transparent;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .customization-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            width: 280px;
+            height: 100vh;
+            color: white;
+            z-index: 1000;
+            overflow-y: auto; /* Enable scrolling */
+        }
+
+        .customization-panel label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .customization-panel input[type="color"],
+        .customization-panel input[type="range"],
+        .customization-panel select {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 5px;
+            font-size: 12px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .widget-preview {
+            margin-top: 0px; /* Remove extra space at the top */
+            margin-left: 320px; /* Adjust margin to leave space for customization panel */
+            padding: 0; /* Remove padding to avoid any box-like appearance */
+            background-color: transparent; /* Ensure no background color causes a box effect */
+        }
+
+        .embed-code-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 500px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .embed-code-container h3 {
+            margin-top: 0;
+        }
+
+        .embed-code-container p {
+            word-wrap: break-word;
+            font-family: monospace;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .embed-code-container .close-embed-modal,
+        .embed-code-container .copy-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+        }
+
+        .embed-code-container .copy-btn {
+            background-color: #28a745;
+        }
+
+        #getEmbedCode, #resetChanges {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        #resetChanges {
+            left: 160px; /* Placed near the embed code button */
+            background-color: #dc3545; /* Red for reset */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header for Customize Your Widget -->
+        <div class="header">
+            Customize Your Widget
+        </div>
+
+        <!-- Customization Panel -->
+        <div class="customization-panel">
+            <label for="outerBgColor">Outer Background Color:</label>
+            <input type="color" id="outerBgColor" value="#ffffff">
+
+            <label for="innerBgColor">Inner Background Color:</label>
+            <input type="color" id="innerBgColor" value="#f9f9f9">
+
+            <label for="textColor">Text Color:</label>
+            <input type="color" id="textColor" value="#333333">
+
+            <label for="buttonColor">Button Color:</label>
+            <input type="color" id="buttonColor" value="#ff6600">
+
+            <label for="arrowColor">Arrow Color:</label>
+            <input type="color" id="arrowColor" value="#000000">
+
+            <label for="starColor">Star Color:</label>
+            <input type="color" id="starColor" value="gold">
+
+            <label for="cardBgColor">Card Background Color:</label>
+            <input type="color" id="cardBgColor" value="#ffffff">
+
+            <label for="fontStyle">Font Style:</label>
+            <select id="fontStyle">
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Times New Roman, serif">Times New Roman</option>
+                <option value="Courier New, monospace">Courier New</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="Verdana, sans-serif">Verdana</option>
+                <option value="Tahoma, sans-serif">Tahoma</option>
+                <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+                <option value="Garamond, serif">Garamond</option>
+                <option value="Brush Script MT, cursive">Brush Script MT</option>
+                <option value="Comic Sans MS, cursive">Comic Sans MS</option>
+                <option value="Lucida Sans, sans-serif">Lucida Sans</option>
+                <option value="Open Sans, sans-serif">Open Sans</option>
+                <option value="Montserrat, sans-serif">Montserrat</option>
+                <option value="Roboto, sans-serif">Roboto</option>
+                <option value="Lato, sans-serif">Lato</option>
+                <option value="Poppins, sans-serif">Poppins</option>
+                <option value="Oswald, sans-serif">Oswald</option>
+                <option value="Merriweather, serif">Merriweather</option>
+                <option value="Playfair Display, serif">Playfair Display</option>
+                <option value="Raleway, sans-serif">Raleway</option>
+            </select>
+
+            <label for="outerHeight">Outer Container Height: <span id="outerHeightValue">auto</span></label>
+            <input type="range" id="outerHeight" min="200" max="1000" value="auto" oninput="this.nextElementSibling.value = this.value">
+            <output id="outerHeightOutput">auto</output>
+
+            <label for="outerWidth">Outer Container Width: <span id="outerWidthValue">80%</span></label>
+            <input type="range" id="outerWidth" min="200" max="1200" value="80" oninput="this.nextElementSibling.value = this.value + '%'">
+            <output id="outerWidthOutput">80%</output>
+
+            <label for="cardHeight">Card Height: <span id="cardHeightValue">300px</span></label>
+            <input type="range" id="cardHeight" min="100" max="500" value="300" oninput="this.nextElementSibling.value = this.value + 'px'">
+            <output id="cardHeightOutput">300px</output>
+
+            <label for="cardWidth">Card Width: <span id="cardWidthValue">220px</span></label>
+            <input type="range" id="cardWidth" min="100" max="400" value="220" oninput="this.nextElementSibling.value = this.value + 'px'">
+            <output id="cardWidthOutput">220px</output>
+
+            <button id="getEmbedCode">Get Embed Code</button>
+            <button id="resetChanges">Reset Changes</button>
+        </div>
+
+        <!-- Widget Preview Section -->
+        <div class="widget-preview">
+            <script src="https://mediascrappers.vercel.app/widget.js?id={{ widget_id }}&outer_bg_color=%2387CEEB&text_color=%23000000&button_color=%23ff0000&card_bg_color=%23ffffff&star_color=gold"></script>
+            <div class="custom-widget" data-widget-id="{{ widget_id }}" data-widget-lazy></div>
+        </div>
+    </div>
+
+    <!-- Embed Code Modal -->
+    <div class="embed-code-container" id="embedModal">
+        <h3>Your Embed Code</h3>
+        <p id="embedCode"></p>
+        <button class="copy-btn" onclick="copyEmbedCode()">Copy Embed Code</button>
+        <button class="close-embed-modal" id="closeEmbedModal">Close</button>
+    </div>
+
+    <script>
+        const defaultValues = {
+            outerBgColor: '#ffffff',
+            innerBgColor: '#f9f9f9',
+            textColor: '#333333',
+            buttonColor: '#ff6600',
+            arrowColor: '#000000',
+            starColor: 'gold',
+            cardBgColor: '#ffffff',
+            fontStyle: 'Arial, sans-serif',
+            outerHeight: 'auto',
+            outerWidth: '80%',
+            cardHeight: '300px',
+            cardWidth: '220px'
+        };
+
+        // Function to update the widget styles dynamically
+        function updateWidgetStyles() {
+            const widgetDiv = document.querySelector('.widget-container');
+            if (widgetDiv) {
+                // Get customization values
+                const outerBgColor = document.getElementById('outerBgColor').value;
+                const innerBgColor = document.getElementById('innerBgColor').value;
+                const textColor = document.getElementById('textColor').value;
+                const fontStyle = document.getElementById('fontStyle').value;
+                const buttonColor = document.getElementById('buttonColor').value;
+                const arrowColor = document.getElementById('arrowColor').value;
+                const starColor = document.getElementById('starColor').value;
+                const cardBgColor = document.getElementById('cardBgColor').value;
+                const outerHeight = document.getElementById('outerHeight').value + "px";
+                const outerWidth = document.getElementById('outerWidth').value + "%";
+                const cardHeight = document.getElementById('cardHeight').value + "px";
+                const cardWidth = document.getElementById('cardWidth').value + "px";
+
+                // Apply the changes
+                widgetDiv.style.backgroundColor = outerBgColor;
+                widgetDiv.style.color = textColor;
+                widgetDiv.style.fontFamily = fontStyle;
+                widgetDiv.style.height = outerHeight;
+                widgetDiv.style.width = outerWidth;
+
+                const googleWidget = widgetDiv.querySelector('.google-widget');
+                if (googleWidget) {
+                    googleWidget.style.backgroundColor = innerBgColor;
+                }
+
+                const button = widgetDiv.querySelector('.review-button');
+                if (button) {
+                    button.style.backgroundColor = buttonColor;
+                }
+
+                const stars = widgetDiv.querySelectorAll('.star');
+                stars.forEach(star => {
+                    star.style.color = starColor;
+                });
+
+                const arrows = widgetDiv.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+                arrows.forEach(arrow => {
+                    arrow.style.color = arrowColor;
+                });
+
+                const cards = widgetDiv.querySelectorAll('.carousel-item');
+                cards.forEach(card => {
+                    card.style.height = cardHeight;
+                    card.style.width = cardWidth;
+                    card.style.backgroundColor = cardBgColor;
+                });
+            }
+        }
+
+        // Reset button functionality to revert all values to default
+        document.getElementById('resetChanges').addEventListener('click', function() {
+            document.getElementById('outerBgColor').value = defaultValues.outerBgColor;
+            document.getElementById('innerBgColor').value = defaultValues.innerBgColor;
+            document.getElementById('textColor').value = defaultValues.textColor;
+            document.getElementById('buttonColor').value = defaultValues.buttonColor;
+            document.getElementById('arrowColor').value = defaultValues.arrowColor;
+            document.getElementById('starColor').value = defaultValues.starColor;
+            document.getElementById('cardBgColor').value = defaultValues.cardBgColor;
+            document.getElementById('fontStyle').value = defaultValues.fontStyle;
+            document.getElementById('outerHeight').value = parseInt(defaultValues.outerHeight);
+            document.getElementById('outerWidth').value = parseInt(defaultValues.outerWidth);
+            document.getElementById('cardHeight').value = parseInt(defaultValues.cardHeight);
+            document.getElementById('cardWidth').value = parseInt(defaultValues.cardWidth);
+            updateWidgetStyles();
+        });
+
+        // Attach event listeners to customization inputs
+        document.getElementById('outerBgColor').addEventListener('input', updateWidgetStyles);
+        document.getElementById('innerBgColor').addEventListener('input', updateWidgetStyles);
+        document.getElementById('textColor').addEventListener('input', updateWidgetStyles);
+        document.getElementById('buttonColor').addEventListener('input', updateWidgetStyles);
+        document.getElementById('arrowColor').addEventListener('input', updateWidgetStyles);
+        document.getElementById('starColor').addEventListener('input', updateWidgetStyles);
+        document.getElementById('fontStyle').addEventListener('change', updateWidgetStyles);
+        document.getElementById('outerHeight').addEventListener('input', updateWidgetStyles);
+        document.getElementById('outerWidth').addEventListener('input', updateWidgetStyles);
+        document.getElementById('cardHeight').addEventListener('input', updateWidgetStyles);
+        document.getElementById('cardWidth').addEventListener('input', updateWidgetStyles);
+        document.getElementById('cardBgColor').addEventListener('input', updateWidgetStyles);
+
+
+        // Embed code button event
+        document.getElementById('getEmbedCode').addEventListener('click', function() {
+            const outerBgColor = document.getElementById('outerBgColor').value;
+            const innerBgColor = document.getElementById('innerBgColor').value;
+            const textColor = document.getElementById('textColor').value;
+            const buttonColor = document.getElementById('buttonColor').value;
+            const arrowColor = document.getElementById('arrowColor').value;
+            const starColor = document.getElementById('starColor').value;
+            const outerHeight = document.getElementById('outerHeight').value + "px";
+            const outerWidth = document.getElementById('outerWidth').value + "%";
+            const cardHeight = document.getElementById('cardHeight').value + "px";
+            const cardWidth = document.getElementById('cardWidth').value + "px";
+            const cardBgColor = document.getElementById('cardBgColor').value;
+            const fontStyle = document.getElementById('fontStyle').value;
+
+            const embedCode = `
+                <script src="https://mediascrappers.vercel.app/widget.js?id={{ widget_id }}&outer_bg_color=${encodeURIComponent(outerBgColor)}&inner_bg_color=${encodeURIComponent(innerBgColor)}&text_color=${encodeURIComponent(textColor)}&button_color=${encodeURIComponent(buttonColor)}&arrow_color=${encodeURIComponent(arrowColor)}&star_color=${encodeURIComponent(starColor)}&outer_height=${outerHeight}&outer_width=${outerWidth}&card_height=${cardHeight}&card_width=${cardWidth}&card_bg_color=${encodeURIComponent(cardBgColor)}&font_style=${encodeURIComponent(fontStyle)}"><\/script>
+                <div class="custom-widget" data-widget-id="{{ widget_id }}" data-widget-lazy></div>
+            `;
+            const embedCodeText = document.getElementById('embedCode');
+            const embedModal = document.getElementById('embedModal');
+            embedCodeText.textContent = embedCode;
+            embedModal.style.display = 'block';
+        });
+
+        // Copy embed code to clipboard
+        function copyEmbedCode() {
+            const embedCodeText = document.getElementById('embedCode');
+            navigator.clipboard.writeText(embedCodeText.textContent);
+            alert('Copied to clipboard!');
+        }
+
+        // Close embed modal
+        document.getElementById('closeEmbedModal').addEventListener('click', function() {
+            const embedModal = document.getElementById('embedModal');
+            embedModal.style.display = 'none';
+        });
+
+        // Initial call to apply any default values
+        updateWidgetStyles();
+    </script>
+</body>
+</html>
